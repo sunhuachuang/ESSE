@@ -14,12 +14,12 @@ jobs:
     steps:
       - name: Get latest published release tag
         id: get_latest_release
-        uses: pozetroninc/github-action-get-latest-release@2b51d48e904071035d6632715d41966f516711dd
+        uses: pozetroninc/github-action-get-latest-release@master
         with:
           repository: ${{ github.repository }}
           excludes: prerelease, draft
       - name: Generate changelog since last published release
-        uses: charmixer/auto-changelog-action@5c6320ae4dedc8743e4439a3c56294c294553fb9
+        uses: charmixer/auto-changelog-action@master
         with:
           future_release: ${{ github.ref }}
           since_tag: ${{ steps.get_latest_release.outputs.release }}
@@ -87,7 +87,7 @@ jobs:
     steps:
       # Set up Flutter.
       - name: Clone Flutter repository with master channel
-        uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
+        uses: subosito/flutter-action@master
         with:
           channel: master
 
