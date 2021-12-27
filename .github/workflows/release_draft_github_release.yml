@@ -21,7 +21,6 @@ jobs:
       - name: Generate changelog since last published release
         uses: charmixer/auto-changelog-action@5c6320ae4dedc8743e4439a3c56294c294553fb9
         with:
-          token: ${{ secrets.FLUTTERGALLERYRELEASEBOT_TOKEN }}
           future_release: ${{ github.ref }}
           since_tag: ${{ steps.get_latest_release.outputs.release }}
       - name: Upload changelog
@@ -44,8 +43,6 @@ jobs:
       - name: Draft release with changelog
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.FLUTTERGALLERYRELEASEBOT_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ESSE ${{ github.ref }}
@@ -163,8 +160,6 @@ jobs:
       - name: Add packaged build to release draft
         id: upload_release_asset
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.FLUTTERGALLERYRELEASEBOT_TOKEN }}
         with:
           upload_url: ${{ needs.draft-release.outputs.upload_url }}
           asset_path: ./esse_${{ matrix.target }}${{ matrix.asset_extension }}
