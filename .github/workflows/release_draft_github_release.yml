@@ -43,6 +43,8 @@ jobs:
       - name: Draft release with changelog
         id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ESSERELEASEBOT_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ESSE ${{ github.ref }}
@@ -160,6 +162,8 @@ jobs:
       - name: Add packaged build to release draft
         id: upload_release_asset
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ESSERELEASEBOT_TOKEN }}
         with:
           upload_url: ${{ needs.draft-release.outputs.upload_url }}
           asset_path: ./esse_${{ matrix.target }}${{ matrix.asset_extension }}
